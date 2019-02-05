@@ -1,0 +1,66 @@
+<!-- header -->
+<html>
+{%load static%}
+<style>
+  .a.active {
+  background-color: dodgerblue;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  }
+  .header {
+  overflow: hidden;
+  background-color:#F0F8FF;
+  padding: 10px 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+  
+  .header-right {
+  float: right;
+}
+img {
+  width: 7%;
+  height: 7%;
+ }
+ p.ex1 {
+  <!-- margin-left: 40px; -->
+  <!-- margin-top:5px; -->
+  margin-right 500px
+  }
+  </style>
+<header class="header">
+  
+  <div class="w3-bar-item w3-padding-24 w3-wide" >
+  <a class="active ex1" href="{%url 'base'%}"><img src="{% static "img/logo.png" %}" alt="My image"></a>
+  </div>
+  <div>
+    <div class="header-right">
+	{% if not request.user.is_authenticated %}
+	    <a class="active" href="{%url 'signup'%}">signup</a>
+        <a href="{%url 'login'%}">login</a>
+	{% else %}
+	   <p class="ex1">Welcome {{user.username}} <a href="{%url 'logout'%}">logout</a></p>
+	 {% endif %}
+    <a href="#about">About</a>
+  </div>
+</div>
+  </header>
+  {% if request.user.is_authenticated %}
+      <p>Hi {{user.username}} to our system Please update your profile</p><br><br>
+      <ul>
+          <li><a href="#">Home</a></li>
+          {% if request.user.username == "admin" %}
+          <li><a href="#">System Administrator</a></li>
+          {% endif %}
+          <li><a href="{%url 'employee_profile'%}">Employee Profile</a></li>
+          <li><a href="#">Employee Directory</a></li>
+          <li><a href="#">Document Center</a></li>
+          <li><a href="#">Absence Requests</a></li>
+          <li><a href="#">Certifications</a></li>
+          <li><a href="#">Performance Reviews</a></li>
+      </ul>
+     
+   {% endif %}
+  {%block content%} {%endblock%}
+  </html>

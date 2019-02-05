@@ -1,0 +1,51 @@
+<!-- header -->
+<html>
+{%load static%}
+<style>
+  .a.active {
+  background-color: dodgerblue;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  }
+  .header {
+  overflow: hidden;
+  background-color:#F0F8FF;
+  padding: 10px 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+  
+  .header-right {
+  float: right;
+}
+img {
+  width: 7%;
+  height: 7%;
+ }
+ a.ex1 {
+  margin-left: 40px;
+  margin-top:5px;
+  }
+  </style>
+<header class="header">
+  
+  <div class="w3-bar-item w3-padding-24 w3-wide" >
+  <a class="active ex1" href="{%url 'base'%}"><img src="{% static "img/logo.png" %}" alt="My image"></a>
+  </div>
+  <div>
+    <div class="header-right">
+	{% if request.user.is_authenticated %}
+	    <p>Welcome {{request.user.username}} <a href="{%url 'logout'%}">logout</a></p>
+		
+	{% else %}
+	    <a class="active" href="{%url 'signup'%}">signup</a>
+        <a href="{%url 'login'%}">login</a>
+	 {% endif %}
+    <a href="#about">About</a>
+  </div>
+</div>
+  </header>
+  
+  {%block content%} {%endblock%}
+  </html>

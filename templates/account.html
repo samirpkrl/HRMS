@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<!DOCTYPE html>
+<html>
+  
+  {% load static %}
+
+
+<h1>Employee Profile</h1>
+
+  <main>
+    <p>You can view your personal information below.</p>
+    <em>If you require changes to your personal information please contact the business manager (see 
+      <a href="#">employee directory</a>).</em>
+    
+    <div class='row'>
+        <div class='col-lg-8 col-lg-offset-2'>
+        <hr>
+       </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Additional Information</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Username: </td><td>{{ user.username }}</td><td></td>
+        </tr>
+        <tr>
+          <td>Email: </td><td><a href= "mailto:{{ user.email }}">{{ user.email }}</a></td><td></td>
+        </tr>
+        <tr>
+          <td>Full name: </td><td>{{ user.first_name }} {{ user.last_name }}</td><td></td>
+        </tr>
+       
+      </tbody>
+    </table>          
+  </main>
+
+</html>
+{% else %}
+  <h2>You are not logged in</h2>
+  <a href="{% url 'login' %}">Login</a>
+{% endif %}
+{% endblock %}
